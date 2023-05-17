@@ -26,6 +26,8 @@ class EventSection extends StatelessWidget {
                     title: "A complete guide for your new born baby",
                     lessons: "16 lessons",
                     widget: BookingButton(),
+                    image: "assets/images/women.png",
+                    isPng :true,
                     ),
               ),
             ),

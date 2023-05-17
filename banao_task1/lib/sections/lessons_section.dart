@@ -1,6 +1,7 @@
 
 import 'package:banao_task1/custom_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../utils/title_header.dart';
 
@@ -24,7 +25,9 @@ class LessonsSection extends StatelessWidget {
                     tag: "BABYCARE",
                     title: "Understanding of human behaviour",
                     lessons: "3 min",
-                    widget: Icon(Icons.lock_outlined),
+                    widget: SvgPicture.asset("assets/lock.svg"),
+                    image: "assets/images/women.png",
+                    isPng: true,
                     ),
               ),
             ),
