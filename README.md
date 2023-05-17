@@ -4,6 +4,9 @@
 
 This project is a UI clone . It aims to replicate the design and layout of the original app UI design.
 
+demo
+![video]("https://drive.google.com/file/d/1ORJmeEEKDTVhN2eiuUaGZqgmmWGn2VvJ/view?usp=sharing")
+
 ## Screen
 
 Description: This is the second screen of the app.
