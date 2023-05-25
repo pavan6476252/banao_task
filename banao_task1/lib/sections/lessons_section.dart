@@ -88,12 +88,7 @@ class LessonsSection extends ConsumerWidget {
               ],
             ),
         error: (error, stackTrace) {
-          print(error);
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            showSnackbar(
-                context, "Connection error - Showing default data..", true);
-          });
-          return Column(
+              return Column(
             children: [
               TitleHeader(title: "Programs for you",viewAll: false),
               SizedBox(

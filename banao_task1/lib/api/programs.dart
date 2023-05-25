@@ -40,3 +40,8 @@ final programProvider = FutureProvider<List<Program>>((ref) async {
     throw Exception('Failed to fetch programs');
   }
 });
+
+
+void refreshProgramProvider(WidgetRef ref) {
+  ref.refresh(programProvider.future);
+}

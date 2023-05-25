@@ -16,7 +16,7 @@ class Lesson {
     required this.name,
     required this.category,
     required this.createdAt,
-    required this. duration,
+    required this.duration,
     required this.locked,
   });
 
@@ -44,3 +44,6 @@ final lessonProvider = FutureProvider<List<Lesson>>((ref) async {
     throw Exception('Failed to fetch Lessons');
   }
 });
+void refreshLessonProvider(WidgetRef ref) {
+  ref.refresh(lessonProvider.future);
+}

@@ -49,7 +49,12 @@ class ProgramSection extends ConsumerWidget {
             ],
           );
         },
-        data: (data) => Column(
+        data: (data) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+            showSnackbar(
+                context, "Data Loaded...", false);
+          });
+          return Column(
               children: [
                 TitleHeader(
                     title: "Programs for you",
@@ -78,9 +83,8 @@ class ProgramSection extends ConsumerWidget {
                   ),
                 ),
               ],
-            ),
+            );},
         error: (error, stackTrace) {
-          print(error);
           WidgetsBinding.instance.addPostFrameCallback((_) {
             showSnackbar(
                 context, "Connection error - Showing default data..", true);
