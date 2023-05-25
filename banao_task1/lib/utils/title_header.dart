@@ -5,7 +5,9 @@ import '../constants.dart';
 
 class TitleHeader extends StatelessWidget {
   String title;
-  TitleHeader({super.key, required this.title});
+  TitleHeader(  {super.key, required this.title, required this.viewAll,this.onTapp});
+  bool viewAll;
+  Function? onTapp ;
 
   @override
   Widget build(BuildContext context) {
@@ -22,19 +24,22 @@ class TitleHeader extends StatelessWidget {
                 fontFamily: GoogleFonts.lora().fontFamily,
                 fontWeight: FontWeight.w600),
           ),
-          Row(
-            children: [
-              Text(
-                "View all",
-                style: TextStyle(color: TaskConstants.grey),
-              ),
-              Icon(
-                Icons.arrow_forward,
-                color: TaskConstants.grey,
-                size: 18,
-              )
-            ],
-          )
+        viewAll?  GestureDetector(
+          onTap: (){onTapp!();},
+          child: Row(
+              children: [
+                Text(
+                  "View all",
+                  style: TextStyle(color: TaskConstants.grey),
+                ),
+                Icon(
+                  Icons.arrow_forward,
+                  color: TaskConstants.grey,
+                  size: 18,
+                )
+              ],
+            ),
+        ):SizedBox.shrink()
         ],
       ),
     );

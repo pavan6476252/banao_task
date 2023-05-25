@@ -3,13 +3,15 @@ import 'package:banao_task1/custom_appbar.dart';
 import 'package:banao_task1/sections/event_section.dart';
 import 'package:banao_task1/sections/intro_section.dart';
 import 'package:banao_task1/sections/lessons_section.dart';
+import 'package:banao_task1/views/learn_tab.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'sections/program_section.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ProviderScope(child: const MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -20,32 +22,58 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  late PageController _pageController;
   int _currentIndex = 0;
+  @override
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: _currentIndex);
+  }
+
   void onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
+      _pageController.animateToPage(
+        index,
+        duration: Duration(milliseconds: 300),
+        curve: Curves.ease,
+      );
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      
-      debugShowCheckedModeBanner: false,
-              theme: ThemeData(useMaterial3: true,cardTheme: CardTheme(color: TaskConstants.white)),
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            useMaterial3: true,
+            cardTheme: CardTheme(color: TaskConstants.white)),
         home: Scaffold(
           extendBodyBehindAppBar: true,
           appBar: const CustomAppBar(),
-          body: SingleChildScrollView(
-            child: Column(
+          body: PageView(
+              controller: _pageController,
+              onPageChanged: (int index) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              },
               children: [
-                IntroSection(),
-                ProgramSection(),
-                EventSection(),
-                LessonsSection()
-              ],
-            ),
-          ),
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      IntroSection(onTabTapped: onTabTapped),
+                      ProgramSection(),
+                      LessonsSection(),
+                      EventSection(),
+                    ],
+                  ),
+                ),
+                LearnTaba(),
+                LearnTaba(),
+                LearnTaba(),
+              ]),
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
               color: TaskConstants.white,
@@ -54,7 +82,7 @@ class _MyAppState extends State<MyApp> {
                 topRight: Radius.circular(20),
               ),
             ),
-            height: 65, // Adjust the height as needed
+            height: 66, // Adjust the height as needed
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -74,7 +102,10 @@ class _MyAppState extends State<MyApp> {
                         onTap: () {},
                         child: Column(
                           children: [
-                            Image.asset("assets/images/Profile.png",scale: 0.8,),
+                            Image.asset(
+                              "assets/images/Profile.png",
+                              scale: 0.8,
+                            ),
                             Text(
                               "Profile",
                               style: TextStyle(

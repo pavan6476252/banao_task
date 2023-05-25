@@ -10,7 +10,7 @@ class CustomCard extends StatelessWidget {
   Widget? widget;
   String image;
   bool? isPng;
-
+  double? height;
   CustomCard(
       {super.key,
       required this.tag,
@@ -18,7 +18,8 @@ class CustomCard extends StatelessWidget {
       required this.lessons,
       required this.image,
       this.isPng,
-      this.widget});
+      this.widget,
+      this.height});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,18 @@ class CustomCard extends StatelessWidget {
         ClipRRect(
           borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-          child: isPng == null ? SvgPicture.asset(image) : Image.asset(image,height: 140,width: double.maxFinite,fit: BoxFit.cover,),
+          child: isPng == null
+              ? SvgPicture.asset(
+                  image,
+                  height: height ?? 180,
+                  fit: BoxFit.cover,
+                )
+              : Image.asset(
+                  image,
+                  height: height ?? 180,
+                  width: double.maxFinite,
+                  fit: BoxFit.cover,
+                ),
         ),
         Expanded(
           child: Padding(
@@ -42,13 +54,17 @@ class CustomCard extends StatelessWidget {
                 children: [
                   Text(
                     tag,
+                    maxLines: 1,
                     style: TextStyle(
+                      overflow: TextOverflow.ellipsis,
                         color: TaskConstants.primary,
                         fontWeight: FontWeight.w500),
                   ),
                   Text(
                     title,
+                    maxLines: 2,
                     style: const TextStyle(
+                      overflow:TextOverflow.ellipsis ,
                         fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   Row(

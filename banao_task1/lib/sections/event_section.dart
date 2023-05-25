@@ -13,9 +13,9 @@ class EventSection extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          TitleHeader(title: "Events and expreriences"),
+          TitleHeader(title: "Events and expreriences",viewAll: true,onTapp: (){},),
           SizedBox(
-            height: 300,
+            height: 320,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: 4,
